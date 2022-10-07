@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 public class GreetingsController {
 
-    @Autowired // IC/CD/CDI Injeção de Depencias
+    @Autowired //IC/ CD/ CDI Injeção de Dependência
     private ProdutoRepository produtoRepository;
 
     /**
@@ -62,7 +62,7 @@ public class GreetingsController {
       }
 
       @PostMapping(value = "/produto/salvar") /* Mapeia a URL */
-      @ResponseBody /* Descreve a reposta informando que o retorno será no corpo da requisição */
+      @ResponseBody /* Descreve a resposta informando que o retorno será no corpo da requisição */
       public ResponseEntity<ProdutoModel> salvar(@RequestBody ProdutoModel produto){ /* Recebe os dados para salvar */
 
           ProdutoModel prod = produtoRepository.save(produto);
