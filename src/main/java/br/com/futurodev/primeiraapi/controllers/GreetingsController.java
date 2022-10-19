@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 
@@ -35,7 +36,6 @@ public class GreetingsController {
     @ResponseStatus(HttpStatus.OK)
     public String mostrarnome(@PathVariable String nome){
         return "Ola "+nome;
-
     }
 
     @RequestMapping(value = "/produto/{descricao}" , method = RequestMethod.GET)
@@ -46,38 +46,40 @@ public class GreetingsController {
         produto.setDescricao(descricao);
         produtoRepository.save(produto); // grava no banco de dados um produto
 
-
         return "Produto "+descricao+" registrado com sucesso!";
-
     }
 
-      @GetMapping(value = "/produtos")
-      @ResponseBody // Retorna os dados no corpo da resposta
-      public ResponseEntity<List<ProdutoModel>> listarProdutos(){
+    @GetMapping(value = "/produtos")
+    @ResponseBody // Retorna os dados no corpo da resposta
+    public ResponseEntity<List<ProdutoModel>> listarProdutos(){
 
         List<ProdutoModel> produtos = produtoRepository.findAll(); // consulta no banco de dados todos os produtos
 
         return new ResponseEntity<List<ProdutoModel>>(produtos, HttpStatus.OK); // Retorna a lista em JSON
+    }
 
-      }
-
-      @PostMapping(value = "/produto/salvar") /* Mapeia a URL */
-      @ResponseBody /* Descreve a resposta informando que o retorno será no corpo da requisição */
-      public ResponseEntity<ProdutoModel> salvar(@RequestBody ProdutoModel produto){ /* Recebe os dados para salvar */
-
+    @PostMapping(value = "/produto/salvar") /* Mapeia a URL */
+    @ResponseBody /* Descreve a resposta informando que o retorno será no corpo da requisição */
+    public ResponseEntity<ProdutoModel> salvar(@RequestBody ProdutoModel produto){ /* Recebe os dados para salvar */
           ProdutoModel prod = produtoRepository.save(produto);
           return new ResponseEntity<ProdutoModel>(prod, HttpStatus.CREATED);
+    }
 
-      }
 
-      @DeleteMapping(value = "/produto/delete") /* Mapeia a URL */
-      @ResponseBody /* Descrição da resposta */
-      public ResponseEntity<String> delete(@RequestParam Long idProduto){ /* Recebe da requisição o parâmetro */
-
+    @DeleteMapping(value = "/produto/delete") /* Mapeia a URL */
+    @ResponseBody /* Descrição da resposta */
+    public ResponseEntity<String> delete(@RequestParam Long idProduto){ /* Recebe da requisição o parâmetro */
            produtoRepository.deleteById(idProduto);
-
            return new ResponseEntity<String>("Produto deletado com sucesso.",HttpStatus.OK);
+    }
 
-      }
+    @GetMapping(value = "/produto/buscar/{id}")
+    @ResponseBody
+    public ResponseEntity<ProdutoModel> buscarPorId(@PathVariable Long id){
+        ProdutoModel prod = produtoRepository.findById(id).get();
+        return new ResponseEntity<ProdutoModel>(prod, HttpStatus.OK);
+
+    }
+
 
 }
