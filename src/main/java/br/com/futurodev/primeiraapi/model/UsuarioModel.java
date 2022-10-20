@@ -29,16 +29,16 @@ public class UsuarioModel {
 
 
     @CreationTimestamp
-    @Column(columnDefinition = "timestamp(0) without time zone DEFAULT timezone('utc'::text, CURRENT_TIMESTAMP(0))", updatable = false)
+   //  @Column(columnDefinition = "timestamp with time zone DEFAULT timezone('utc'::text, CURRENT_TIMESTAMP(0))", updatable = false)
     private OffsetDateTime dataCadastro;
 
 
     @UpdateTimestamp
-    @Column(columnDefinition = "timestamp(0) without time zone DEFAULT timezone('utc'::text, CURRENT_TIMESTAMP(0))")
+  //   @Column(columnDefinition = "timestamp with time zone DEFAULT timezone('utc'::text, CURRENT_TIMESTAMP(0))")
     private OffsetDateTime dataAtualizacao;
 
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<TelefoneModel> telefones = new ArrayList<TelefoneModel>();
 

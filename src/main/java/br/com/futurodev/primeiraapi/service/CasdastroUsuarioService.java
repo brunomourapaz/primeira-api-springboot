@@ -38,4 +38,8 @@ public class CasdastroUsuarioService {
         return usuarioRepository.getUserByName(nome);
     }
 
+    public List<UsuarioModel> getUsers(){
+        return usuarioRepository.findAll();
+    }
+
 }

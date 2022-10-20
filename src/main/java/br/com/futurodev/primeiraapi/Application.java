@@ -13,7 +13,7 @@ import java.util.TimeZone;
 public class Application {
     public static void main(String[] args) {
 
-        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         // É a linha principal que roda o projeto Java Spring Boot
         SpringApplication.run(Application.class, args);
     }

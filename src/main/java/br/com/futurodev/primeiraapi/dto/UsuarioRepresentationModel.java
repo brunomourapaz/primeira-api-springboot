@@ -1,9 +1,6 @@
 package br.com.futurodev.primeiraapi.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +13,11 @@ public class UsuarioRepresentationModel {
 
     private String senha;
 
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
     private OffsetDateTime dataCadastro;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
     private OffsetDateTime dataAtualizacao;
 
 
@@ -30,7 +30,7 @@ public class UsuarioRepresentationModel {
     }
 
 
-    @JsonIgnoreProperties(value = "tipo", allowGetters = true)
+    // @JsonIgnoreProperties(value = "tipo", allowGetters = true)
     private List<TelefoneRepresentationModel> telefones = new ArrayList<TelefoneRepresentationModel>();
 
     public List<TelefoneRepresentationModel> getTelefones() {
