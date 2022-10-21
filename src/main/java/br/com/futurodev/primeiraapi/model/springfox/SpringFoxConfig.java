@@ -1,4 +1,4 @@
-package br.com.futurodev.primeiraapi.springfox;
+package br.com.futurodev.primeiraapi.model.springfox;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -129,7 +129,7 @@ public class UsuarioController {
      */
 
 
-    // @CrossOrigin(origins = "http://app.floripa.com:9000")
+    @CrossOrigin
     @ApiOperation("Listar usuários")
     @GetMapping(value = "", produces = "application/json")
     @ResponseBody
