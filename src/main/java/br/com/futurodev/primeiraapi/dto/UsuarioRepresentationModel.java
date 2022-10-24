@@ -14,11 +14,11 @@ public class UsuarioRepresentationModel {
     private String senha;
 
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
-    private OffsetDateTime dataCadastro;
+    // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
+    //private OffsetDateTime dataCadastro;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
-    private OffsetDateTime dataAtualizacao;
+   // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
+   // private OffsetDateTime dataAtualizacao;
 
 
     public String getSenha() {
@@ -67,19 +67,4 @@ public class UsuarioRepresentationModel {
     }
 
 
-    public OffsetDateTime getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(OffsetDateTime dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    public OffsetDateTime getDataAtualizacao() {
-        return dataAtualizacao;
-    }
-
-    public void setDataAtualizacao(OffsetDateTime dataAtualizacao) {
-        this.dataAtualizacao = dataAtualizacao;
-    }
 }

@@ -1,6 +1,6 @@
 package br.com.futurodev.primeiraapi.controllers;
 
-import br.com.futurodev.primeiraapi.model.ProdutoModel;
+import br.com.futurodev.primeiraapi.model.Produto;
 import br.com.futurodev.primeiraapi.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,7 +42,7 @@ public class GreetingsController {
     @ResponseStatus(HttpStatus.OK)
     public String salvar(@PathVariable String descricao){
 
-        ProdutoModel produto = new ProdutoModel();
+        Produto produto = new Produto();
         produto.setDescricao(descricao);
         produtoRepository.save(produto); // grava no banco de dados um produto
 
@@ -51,18 +51,18 @@ public class GreetingsController {
 
     @GetMapping(value = "/produtos")
     @ResponseBody // Retorna os dados no corpo da resposta
-    public ResponseEntity<List<ProdutoModel>> listarProdutos(){
+    public ResponseEntity<List<Produto>> listarProdutos(){
 
-        List<ProdutoModel> produtos = produtoRepository.findAll(); // consulta no banco de dados todos os produtos
+        List<Produto> produtos = produtoRepository.findAll(); // consulta no banco de dados todos os produtos
 
-        return new ResponseEntity<List<ProdutoModel>>(produtos, HttpStatus.OK); // Retorna a lista em JSON
+        return new ResponseEntity<List<Produto>>(produtos, HttpStatus.OK); // Retorna a lista em JSON
     }
 
     @PostMapping(value = "/produto/salvar") /* Mapeia a URL */
     @ResponseBody /* Descreve a resposta informando que o retorno será no corpo da requisição */
-    public ResponseEntity<ProdutoModel> salvar(@RequestBody ProdutoModel produto){ /* Recebe os dados para salvar */
-          ProdutoModel prod = produtoRepository.save(produto);
-          return new ResponseEntity<ProdutoModel>(prod, HttpStatus.CREATED);
+    public ResponseEntity<Produto> salvar(@RequestBody Produto produto){ /* Recebe os dados para salvar */
+          Produto prod = produtoRepository.save(produto);
+          return new ResponseEntity<Produto>(prod, HttpStatus.CREATED);
     }
 
 
@@ -75,9 +75,9 @@ public class GreetingsController {
 
     @GetMapping(value = "/produto/buscar/{id}")
     @ResponseBody
-    public ResponseEntity<ProdutoModel> buscarPorId(@PathVariable Long id){
-        ProdutoModel prod = produtoRepository.findById(id).get();
-        return new ResponseEntity<ProdutoModel>(prod, HttpStatus.OK);
+    public ResponseEntity<Produto> buscarPorId(@PathVariable Long id){
+        Produto prod = produtoRepository.findById(id).get();
+        return new ResponseEntity<Produto>(prod, HttpStatus.OK);
 
     }
 

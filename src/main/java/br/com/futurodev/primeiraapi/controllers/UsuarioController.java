@@ -3,20 +3,17 @@ package br.com.futurodev.primeiraapi.controllers;
 import br.com.futurodev.primeiraapi.dto.TelefoneRepresentationModel;
 import br.com.futurodev.primeiraapi.dto.UsuarioRepresentationModel;
 import br.com.futurodev.primeiraapi.input.UsuarioInput;
-import br.com.futurodev.primeiraapi.model.TelefoneModel;
-import br.com.futurodev.primeiraapi.model.UsuarioModel;
-import br.com.futurodev.primeiraapi.repository.UsuarioRepository;
-import br.com.futurodev.primeiraapi.service.CasdastroUsuarioService;
+import br.com.futurodev.primeiraapi.model.Telefone;
+import br.com.futurodev.primeiraapi.model.Usuario;
+import br.com.futurodev.primeiraapi.service.CadastroUsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,12 +24,12 @@ import java.util.stream.Collectors;
 public class UsuarioController {
 
     @Autowired
-    private CasdastroUsuarioService casdastroUsuarioService;
+    private CadastroUsuarioService casdastroUsuarioService;
 
 
    /* @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<UsuarioModel> cadastrar(@RequestBody UsuarioModel usuario){
-        UsuarioModel usu = casdastroUsuarioService.salvar(usuario);
+        UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
         return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu), HttpStatus.CREATED);
     }*/
 
@@ -40,7 +37,7 @@ public class UsuarioController {
     @PostMapping(value = "/", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> cadastrar(@RequestBody UsuarioInput usuarioInput){
         // converte UsuarioInput em UsuarioModel
-        UsuarioModel usu = toDomainObject(usuarioInput);
+        Usuario usu = toDomainObject(usuarioInput);
         // chama nosso service para salvar o UsuarioModel no banco de dados
         casdastroUsuarioService.salvar(usu);
 
@@ -52,7 +49,7 @@ public class UsuarioController {
 
  /*   @PutMapping(value = "/", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> atualizar(@RequestBody UsuarioModel usuario){
-        UsuarioModel usu = casdastroUsuarioService.salvar(usuario);
+        UsuarioModel usu = cadastroUsuarioService.salvar(usuario);
         return new ResponseEntity<UsuarioRepresentationModel>(toModel(usu), HttpStatus.OK);
 
     }*/
@@ -60,7 +57,7 @@ public class UsuarioController {
     @ApiOperation("Atualiza um usuário")
     @PutMapping(value = "/", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> atualizar(@RequestBody UsuarioInput usuarioInput){
-        UsuarioModel usuario = casdastroUsuarioService.salvar(toDomainObject(usuarioInput));
+        Usuario usuario = casdastroUsuarioService.salvar(toDomainObject(usuarioInput));
         return new ResponseEntity<UsuarioRepresentationModel>(toModel(usuario), HttpStatus.OK);
 
     }
@@ -84,7 +81,7 @@ public class UsuarioController {
     @ApiOperation("Busca um usuário por ID")
     @GetMapping(value = "/{idUsuario}", produces = "application/json")
     public ResponseEntity<UsuarioRepresentationModel> getUserById(@PathVariable(value = "idUsuario") Long idUsuario){
-        UsuarioModel usu =  casdastroUsuarioService.getUserById(idUsuario);
+        Usuario usu =  casdastroUsuarioService.getUserById(idUsuario);
 
         UsuarioRepresentationModel usuarioRepresentationModel = toModel(usu);
 
@@ -97,11 +94,11 @@ public class UsuarioController {
     @ResponseBody
     public ResponseEntity<List<UsuarioRepresentationModel>> getUserByName(@RequestParam (name = "nome") String nome){
         // obtem a lista de usuario do tipo Model, nossas entidades
-        List<UsuarioModel> usuarios = casdastroUsuarioService.getUserByName(nome);
+        List<Usuario> usuarios = casdastroUsuarioService.getUserByName(nome);
 
         // nos convertemos o objeto do tipo UsuarioModel para RepresentationModel (DTO)
         List<UsuarioRepresentationModel> usuariosRepresentationModel = toCollectionModel(usuarios);
-        System.out.println(usuariosRepresentationModel.get(0).getDataCadastro());
+       // System.out.println(usuariosRepresentationModel.get(0).getDataCadastro());
         return new ResponseEntity<List<UsuarioRepresentationModel>>(usuariosRepresentationModel,HttpStatus.OK);
     }
 
@@ -135,7 +132,7 @@ public class UsuarioController {
     @ResponseBody
     public ResponseEntity<List<UsuarioRepresentationModel>> getUsers(){
         // obtem a lista de usuario do tipo Model, nossas entidades
-        List<UsuarioModel> usuarios = casdastroUsuarioService.getUsers();
+        List<Usuario> usuarios = casdastroUsuarioService.getUsers();
 
         // nos convertemos o objeto do tipo UsuarioModel para RepresentationModel (DTO)
         List<UsuarioRepresentationModel> usuariosRepresentationModel = toCollectionModel(usuarios);
@@ -144,17 +141,18 @@ public class UsuarioController {
 
 
     // converte um objeto do tipo UsuarioModel para um objeto do tipo RepresentationModel
-    private UsuarioRepresentationModel toModel(UsuarioModel usu) {
+    private UsuarioRepresentationModel toModel(Usuario usu) {
 
         UsuarioRepresentationModel usuarioRepresentationModel = new UsuarioRepresentationModel();
         usuarioRepresentationModel.setId(usu.getId());
         usuarioRepresentationModel.setNome(usu.getNome());
         usuarioRepresentationModel.setLogin(usu.getLogin());
         usuarioRepresentationModel.setSenha(usu.getSenha());
-        usuarioRepresentationModel.setDataCadastro(usu.getDataCadastro());
-        usuarioRepresentationModel.setDataAtualizacao(usu.getDataAtualizacao());
+        // usuarioRepresentationModel.setDataCadastro(usu.getDataCadastro());
+        //usuarioRepresentationModel.setDataAtualizacao(usu.getDataAtualizacao());
 
 
+        // itera nos telefones do usuario e converter para DTOs
         for (int i=0; i<usu.getTelefones().size(); i++){
 
             TelefoneRepresentationModel telefoneRepresentationModel = new TelefoneRepresentationModel();
@@ -169,7 +167,7 @@ public class UsuarioController {
     }
 
     // Converte uma lista de objetos do tipo UsuarioModel para uma lista de objetos do tipo UsuarioRepresentationModel
-    private List<UsuarioRepresentationModel> toCollectionModel(List<UsuarioModel> usuariosModel){
+    private List<UsuarioRepresentationModel> toCollectionModel(List<Usuario> usuariosModel){
         return usuariosModel.stream()
                 .map(usuarioModel -> toModel(usuarioModel))
                 .collect(Collectors.toList());
@@ -178,29 +176,29 @@ public class UsuarioController {
 
 
     // Converter um objeto do tipo UsuarioInput para UsuarioModel
-    private UsuarioModel toDomainObject(UsuarioInput usuarioInput){
+    private Usuario toDomainObject(UsuarioInput usuarioInput){
 
-        UsuarioModel usuarioModel = new UsuarioModel();
-        usuarioModel.setId(usuarioInput.getId());
-        usuarioModel.setNome(usuarioInput.getNome());
-        usuarioModel.setLogin(usuarioInput.getLogin());
-        usuarioModel.setSenha(usuarioInput.getSenha());
+        Usuario usuario = new Usuario();
+        usuario.setId(usuarioInput.getId());
+        usuario.setNome(usuarioInput.getNome());
+        usuario.setLogin(usuarioInput.getLogin());
+        usuario.setSenha(usuarioInput.getSenha());
 
 
 
         for (int i=0; i<usuarioInput.getTelefones().size(); i++){
-            TelefoneModel telefoneModel = new TelefoneModel();
-            telefoneModel.setTipo(usuarioInput.getTelefones().get(i).getTipo());
-            telefoneModel.setNumero(usuarioInput.getTelefones().get(i).getNumero());
-            telefoneModel.setId(usuarioInput.getTelefones().get(i).getId());
-            telefoneModel.setUsuario(usuarioModel);
+            Telefone telefone = new Telefone();
+            telefone.setTipo(usuarioInput.getTelefones().get(i).getTipo());
+            telefone.setNumero(usuarioInput.getTelefones().get(i).getNumero());
+            telefone.setId(usuarioInput.getTelefones().get(i).getId());
+            telefone.setUsuario(usuario);
 
-            usuarioModel.getTelefones().add(telefoneModel);
+            usuario.getTelefones().add(telefone);
 
         }
 
 
-        return usuarioModel;
+        return usuario;
 
     }
 }

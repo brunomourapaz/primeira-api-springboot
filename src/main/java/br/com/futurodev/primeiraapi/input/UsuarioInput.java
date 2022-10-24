@@ -1,7 +1,6 @@
 package br.com.futurodev.primeiraapi.input;
 
 import br.com.futurodev.primeiraapi.dto.TelefoneRepresentationModel;
-import br.com.futurodev.primeiraapi.model.UsuarioModel;
 
 import java.util.ArrayList;
 import java.util.List;

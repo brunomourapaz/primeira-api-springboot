@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "telefone")
-public class TelefoneModel {
+public class Telefone {
 
    // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_telefone")
    // @SequenceGenerator(name = "seq_telefone", sequenceName = "seq_telefone_sequencia", allocationSize = 1, initialValue = 1)
@@ -24,13 +24,13 @@ public class TelefoneModel {
     @ManyToOne
     @JoinColumn(name = "idUsuario", referencedColumnName = "id", foreignKey = @ForeignKey(name ="fk_usuario"))
     @JsonBackReference
-    private UsuarioModel usuario;
+    private Usuario usuario;
 
-    public UsuarioModel getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioModel usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
@@ -63,7 +63,7 @@ public class TelefoneModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TelefoneModel that = (TelefoneModel) o;
+        Telefone that = (Telefone) o;
         return id.equals(that.id);
     }
 

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "produto")
-public class ProdutoModel implements Serializable {
+public class Produto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +46,7 @@ public class ProdutoModel implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProdutoModel that = (ProdutoModel) o;
+        Produto that = (Produto) o;
         return id.equals(that.id);
     }
 
