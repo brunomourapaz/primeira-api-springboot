@@ -31,11 +31,6 @@ public class CadastroUsuarioService implements UserDetailsService {
     }
 
 
-
-
-
-
-
     @Transactional(readOnly = true)
     public Usuario getUserById(Long idUsuario){
         Usuario usuario = usuarioRepository.findById(idUsuario).get();

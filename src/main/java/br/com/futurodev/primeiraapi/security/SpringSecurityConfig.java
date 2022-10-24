@@ -34,17 +34,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                  1 - Passando só a url,
                  2 - Passando só p método (Get, Post...etc)
                  3 - Passando método + url
-                 Nesse caso liberei o /topicos o /topicos/ com barra no final é barrado
+                 Nesse caso liberei o /usuarios o /usuarios/ com barra no final é barrado
                 */
                 .antMatchers(HttpMethod.GET, "/usuarios")
                 //Permito acesso a todos
                 .permitAll()
                 //.antMatchers(HttpMethod.GET, "/topicos/*").permitAll()
                 /*
-                 * Quando for realizado um delete para o endpoint '/topicos/*'
+                 * Quando for realizado um delete para o endpoint '/usuarios/*'
                  * será verificado no token qual a Claim (ROLE) que ele possui
                  * e só será permitida execução da requisição se a role for, nesse
-                 * caso, o de moderador
+                 * caso, o de admin
                  * */
                 //.antMatchers(HttpMethod.DELETE, "/usuarios/*").hasRole("ADMIN")
                 .antMatchers("/usuarios/**").hasRole("ADMIN")
