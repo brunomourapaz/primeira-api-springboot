@@ -49,14 +49,17 @@ public class GreetingsController {
         return "Produto "+descricao+" registrado com sucesso!";
     }
 
+    /*
     @GetMapping(value = "/produtos")
     @ResponseBody // Retorna os dados no corpo da resposta
     public ResponseEntity<List<Produto>> listarProdutos(){
 
-        List<Produto> produtos = produtoRepository.findAll(); // consulta no banco de dados todos os produtos
+       // List<Produto> produtos = produtoRepository.findAll(); // consulta no banco de dados todos os produtos
 
-        return new ResponseEntity<List<Produto>>(produtos, HttpStatus.OK); // Retorna a lista em JSON
+        // return new ResponseEntity<List<Produto>>(produtos, HttpStatus.OK); // Retorna a lista em JSON
     }
+    */
+
 
     @PostMapping(value = "/produto/salvar") /* Mapeia a URL */
     @ResponseBody /* Descreve a resposta informando que o retorno será no corpo da requisição */

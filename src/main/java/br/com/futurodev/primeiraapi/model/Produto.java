@@ -3,6 +3,7 @@ package br.com.futurodev.primeiraapi.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 @Entity
@@ -13,10 +14,58 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String descricao;
-    private double precoUnitario;
 
+    private String descricaoReduzida;
+
+    private double precoCompra;
+
+    private double precoVenda;
+
+    private OffsetDateTime dataHoraCadastro;
+
+    private OffsetDateTime dataHoraAlteracao;
+
+
+    public String getDescricaoReduzida() {
+        return descricaoReduzida;
+    }
+
+    public void setDescricaoReduzida(String descricaoReduzida) {
+        this.descricaoReduzida = descricaoReduzida;
+    }
+
+    public double getPrecoCompra() {
+        return precoCompra;
+    }
+
+    public void setPrecoCompra(double precoCompra) {
+        this.precoCompra = precoCompra;
+    }
+
+    public double getPrecoVenda() {
+        return precoVenda;
+    }
+
+    public void setPrecoVenda(double precoVenda) {
+        this.precoVenda = precoVenda;
+    }
+
+    public OffsetDateTime getDataHoraCadastro() {
+        return dataHoraCadastro;
+    }
+
+    public void setDataHoraCadastro(OffsetDateTime dataHoraCadastro) {
+        this.dataHoraCadastro = dataHoraCadastro;
+    }
+
+    public OffsetDateTime getDataHoraAlteracao() {
+        return dataHoraAlteracao;
+    }
+
+    public void setDataHoraAlteracao(OffsetDateTime dataHoraAlteracao) {
+        this.dataHoraAlteracao = dataHoraAlteracao;
+    }
 
     public Long getId() {
         return id;
@@ -34,13 +83,6 @@ public class Produto implements Serializable {
         this.descricao = descricao;
     }
 
-    public double getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public void setPrecoUnitario(double precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
 
     @Override
     public boolean equals(Object o) {

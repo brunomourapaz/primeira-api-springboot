@@ -19,7 +19,7 @@ import java.util.Date;
 @Component
 public class JwtTokenAutenticacaoService {
     /* A validade do Token de 2 dias */
-    private static final long EXPERAION_TIME = 24* 60* 60 * 2;
+    private static final long EXPERAION_TIME = 24 * 60 * 60 * 2;
 
     /* Uma senha única para compor a atentiticação e ajudar na segurança */
     private static final String SECRET = "SenhaExtremamenteSecretaForte";

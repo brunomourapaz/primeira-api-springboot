@@ -1,8 +1,10 @@
-INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Arroz Tio João', '15.60');
-INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Feijão Carioca', '9.30');
-INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Erva Charrua', '11.85');
-INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Açucar Cristal', '5.98');
-INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Laranja Suco', '4.40');
+--INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Arroz Tio João', '15.60');
+--INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Feijão Carioca', '9.30');
+--INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Erva Charrua', '11.85');
+--INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Açucar Cristal', '5.98');
+--INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Laranja Suco', '4.40');
+
+INSERT INTO public.produto(descricao, preco_compra, preco_venda) VALUES ('Arroz', '10.50', '16.70');
 
 -- INSERT INTO public.usuario(data_atualizacao, data_cadastro, login, nome, senha) VALUES (timezone('utc', CURRENT_TIMESTAMP(0)),timezone('utc', CURRENT_TIMESTAMP(0)), 'brunomoura', 'Bruno Moura', '$2a$10$k8TpIS86pFfdgMSEraMtSOc9IXV95VnoqIxkIkkRz9a/PLpyJC0mm');
 -- INSERT INTO public.usuario(data_atualizacao, data_cadastro, login, nome, senha) VALUES (timezone('utc', CURRENT_TIMESTAMP(0)),timezone('utc', CURRENT_TIMESTAMP(0)), 'rodrigoferreira', 'Rodrigo Ferreira', '907080');
@@ -14,6 +16,7 @@ INSERT INTO public.produto(descricao, preco_unitario) VALUES ('Laranja Suco', '4
 
 INSERT INTO public.role(nome_role) VALUES ('ROLE_ADMIN');
 INSERT INTO public.role(nome_role) VALUES ('ROLE_CAIXA');
+
 INSERT INTO public.usuario(login, nome, senha) VALUES ('brunomoura', 'Bruno Moura', '$2a$10$8okjbHGqFzdFAX.XtVBO6eEZWi4F7W285Yy6ZsQC9ZyecUB.gO91C');
 INSERT INTO public.usuarios_role(usuario_id, role_id) VALUES (1, 1);
 
