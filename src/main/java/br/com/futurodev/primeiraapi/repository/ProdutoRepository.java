@@ -10,14 +10,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ProdutoRepository extends CrudRepository<Produto, Long> {
+public interface ProdutoRepository extends JpaRepository<Produto, Long> { //CrudRepository
 
     /*
       @Query(value = "select u from Usuario u where u.login = ?1")
     Usuario findUserByLogin(String login);
      */
 
-    @Query("select p from Produto p where p.descricao like %?1%")
+    @Query("from Produto p where p.descricao like %?1%")
     List<Produto> getProdutosByDescricao(String descricao);
 
 

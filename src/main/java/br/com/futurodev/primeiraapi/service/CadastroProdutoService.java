@@ -22,7 +22,7 @@ public class CadastroProdutoService {
     }
 
     @Transactional
-    public void delete(Long idProduto) {
+    public void deleteById(Long idProduto) {
         produtoRepository.deleteById(idProduto);
     }
 

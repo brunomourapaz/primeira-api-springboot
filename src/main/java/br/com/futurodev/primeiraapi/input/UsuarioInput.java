@@ -2,13 +2,17 @@ package br.com.futurodev.primeiraapi.input;
 
 import br.com.futurodev.primeiraapi.dto.TelefoneRepresentationModel;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioInput {
 
     private Long id;
+
     private String nome;
+
+    @NotBlank(message = "{login.not.blank}")
     private String login;
     private String senha;
 

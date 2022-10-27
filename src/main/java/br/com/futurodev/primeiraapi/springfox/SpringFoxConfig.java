@@ -26,7 +26,8 @@ public class SpringFoxConfig extends WebMvcConfigurationSupport {
                 .apis(RequestHandlerSelectors.any()) // especificar o que queremos, e quais controladores, endpoints que o springfox orá scanear
                 .build() // montamos nosso sumário Docket
                 .apiInfo(metaData())
-                .tags(new Tag("Usuários", "Gerencia usuários"));
+                .tags(new Tag("Usuários", "Gerencia usuários"),
+                        new Tag("Produtos", "Gerencia produtos"));
 
     }
 

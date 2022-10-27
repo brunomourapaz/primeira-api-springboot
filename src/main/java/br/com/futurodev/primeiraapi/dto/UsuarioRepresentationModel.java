@@ -1,6 +1,10 @@
 package br.com.futurodev.primeiraapi.dto;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,17 +12,17 @@ import java.util.List;
 public class UsuarioRepresentationModel {
 
     private Long id;
+
+   // @JsonIgnore //ignora o atributo na geração da represemtação de saída
     private String nome;
     private String login;
 
+   // @JsonIgnore
     private String senha;
 
+    private OffsetDateTime dataCadastro;
 
-    // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
-    //private OffsetDateTime dataCadastro;
-
-   // @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ssZ", timezone = "UTC")
-   // private OffsetDateTime dataAtualizacao;
+    private OffsetDateTime dataAtualizacao;
 
 
     public String getSenha() {
@@ -30,7 +34,7 @@ public class UsuarioRepresentationModel {
     }
 
 
-    // @JsonIgnoreProperties(value = "tipo", allowGetters = true)
+    @JsonIgnoreProperties(value = "tipo", allowGetters = true)
     private List<TelefoneRepresentationModel> telefones = new ArrayList<TelefoneRepresentationModel>();
 
     public List<TelefoneRepresentationModel> getTelefones() {
@@ -67,4 +71,19 @@ public class UsuarioRepresentationModel {
     }
 
 
+    public OffsetDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(OffsetDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public OffsetDateTime getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(OffsetDateTime dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }
 }

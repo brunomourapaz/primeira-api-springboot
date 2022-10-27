@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +36,7 @@ public class UsuarioController {
 
     @ApiOperation("Salva um usuário")
     @PostMapping(value = "/", produces = "application/json")
-    public ResponseEntity<UsuarioRepresentationModel> cadastrar(@RequestBody UsuarioInput usuarioInput){
+    public ResponseEntity<UsuarioRepresentationModel> cadastrar(@RequestBody @Valid UsuarioInput usuarioInput){
         // converte UsuarioInput em UsuarioModel
         Usuario usu = toDomainObject(usuarioInput);
         // chama nosso service para salvar o UsuarioModel no banco de dados
@@ -67,8 +68,8 @@ public class UsuarioController {
     @DeleteMapping(value = "/")
     @ResponseBody
     public ResponseEntity<String> delete(@ApiParam(value = "ID do usuário", example = "1") @RequestParam Long idUsuario){
-         casdastroUsuarioService.delete(idUsuario);
-         return new ResponseEntity<String>("Usuário deletado com sucesso!",HttpStatus.OK);
+        casdastroUsuarioService.delete(idUsuario);
+        return new ResponseEntity<String>("Usuário deletado com sucesso!",HttpStatus.OK);
     }
 
 
@@ -98,7 +99,7 @@ public class UsuarioController {
 
         // nos convertemos o objeto do tipo UsuarioModel para RepresentationModel (DTO)
         List<UsuarioRepresentationModel> usuariosRepresentationModel = toCollectionModel(usuarios);
-       // System.out.println(usuariosRepresentationModel.get(0).getDataCadastro());
+        // System.out.println(usuariosRepresentationModel.get(0).getDataCadastro());
         return new ResponseEntity<List<UsuarioRepresentationModel>>(usuariosRepresentationModel,HttpStatus.OK);
     }
 

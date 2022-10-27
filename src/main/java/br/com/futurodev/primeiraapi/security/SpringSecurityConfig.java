@@ -94,7 +94,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                         UsernamePasswordAuthenticationFilter.class)
 
                 /* Filtrar demais requisições para verificar a preservação do TOKEN JWT no HEADER do HTTP */
-                .addFilterBefore(new JwtApiAutenticacaoFilter(), UsernamePasswordAuthenticationFilter.class);
+               .addFilterBefore(new JwtApiAutenticacaoFilter(), UsernamePasswordAuthenticationFilter.class);
 
 
 

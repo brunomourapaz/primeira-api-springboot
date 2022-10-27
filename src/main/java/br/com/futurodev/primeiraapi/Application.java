@@ -2,6 +2,7 @@ package br.com.futurodev.primeiraapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.TimeZone;
@@ -10,6 +11,7 @@ import java.util.TimeZone;
  *
  * Spring Boot application starter class
  */
+// @SpringBootApplication(exclude = {SecurityAutoConfiguration.class}) // remover a propriedade exclude para funcionar token
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {
