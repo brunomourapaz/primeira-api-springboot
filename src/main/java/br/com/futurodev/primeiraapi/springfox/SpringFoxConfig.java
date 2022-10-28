@@ -27,7 +27,7 @@ public class SpringFoxConfig extends WebMvcConfigurationSupport {
                 .build() // montamos nosso sumário Docket
                 .apiInfo(metaData())
                 .tags(new Tag("Usuários", "Gerencia usuários"),
-                        new Tag("Produtos", "Gerencia produtos"));
+                      new Tag("Produtos", "Gerencia produtos"));
 
     }
 

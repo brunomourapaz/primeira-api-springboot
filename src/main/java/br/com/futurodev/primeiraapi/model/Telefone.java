@@ -3,11 +3,12 @@ package br.com.futurodev.primeiraapi.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "telefone")
-public class Telefone {
+public class Telefone implements Serializable {
 
    // @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_telefone")
    // @SequenceGenerator(name = "seq_telefone", sequenceName = "seq_telefone_sequencia", allocationSize = 1, initialValue = 1)
