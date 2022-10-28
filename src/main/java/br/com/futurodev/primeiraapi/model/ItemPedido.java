@@ -1,6 +1,7 @@
 package br.com.futurodev.primeiraapi.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,12 +29,9 @@ public class ItemPedido implements Serializable {
     @JoinColumn(name = "id_produto", foreignKey = @ForeignKey(name = "fk_produto"))
     private Produto produto;
 
-
-
     @ManyToOne
     @JoinColumn(name = "id_pedido", referencedColumnName = "id", foreignKey = @ForeignKey(name =  "fk_pedido"))
-    // @JsonBackReference
+    @JsonBackReference
     private Pedido pedido;
-
 
 }

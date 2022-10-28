@@ -44,8 +44,8 @@ public class Pedido implements Serializable {
     private FormaPagamento formaPagamento;
 
     @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    // @JsonManagedReference
-    private List<ItemPedido> itensPedido;
+    @JsonManagedReference
+    private List<ItemPedido> itensPedido = new ArrayList<ItemPedido>();
 
 
 
