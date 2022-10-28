@@ -17,8 +17,7 @@ public class CadastroPedidoService {
 
    @Transactional
     public Pedido salvar(Pedido pedido){
-       Pedido ped = pedidoRepository.saveAndFlush(pedido);
-        return ped;
+        return  pedidoRepository.save(pedido);
     }
 
     @Transactional
@@ -32,6 +31,10 @@ public class CadastroPedidoService {
 
     public List<Pedido> getPedidos(){
         return pedidoRepository.findAll();
+    }
+
+    public List<Pedido> getPedidoByIdCliente(Long idCliente){
+       return pedidoRepository.getPedidosByIdCliente(idCliente);
     }
 
 }

@@ -37,4 +37,8 @@ public class Cliente implements Serializable{
     //@JsonManagedReference
     private List<Pedido> pedidos;
 
+    @JsonManagedReference
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
 }

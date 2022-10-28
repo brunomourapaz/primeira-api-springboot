@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -31,7 +32,10 @@ public class ItemPedido implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "id_pedido", referencedColumnName = "id", foreignKey = @ForeignKey(name =  "fk_pedido"))
-    @JsonBackReference
     private Pedido pedido;
 
+    @JsonBackReference
+    public Pedido getPedido() {
+        return pedido;
+    }
 }

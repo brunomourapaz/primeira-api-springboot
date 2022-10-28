@@ -15,7 +15,8 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "pedido")
 public class Pedido implements Serializable {
@@ -39,14 +40,20 @@ public class Pedido implements Serializable {
     // @JsonBackReference
     private Cliente cliente;
 
-    @OneToOne
-    @JoinColumn(name = "id_forma_pagamento", referencedColumnName = "id",foreignKey = @ForeignKey(name = "fk_forma_pgto"))
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "id_forma_pagamento", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_forma_pgto"))
     private FormaPagamento formaPagamento;
 
-    @OneToMany(mappedBy = "pedido", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<ItemPedido> itensPedido = new ArrayList<ItemPedido>();
 
+    @JsonManagedReference
+    public List<ItemPedido> getItensPedido() {
+        return itensPedido;
+    }
 
-
+    @JsonBackReference
+    public Cliente getCliente() {
+        return cliente;
+    }
 }
