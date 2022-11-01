@@ -51,7 +51,7 @@ public class ProdutoController {
     }
 
     @ApiOperation("Busca um produto por ID")
-    @GetMapping(value = "/{idProduto}")
+    @GetMapping(value = "/produto/{idProduto}")
     public ResponseEntity<ProdutoRepresentationModel> getProdutoById(@ApiParam(value = "Id do produto", example = "1")
                                                                      @PathVariable(value = "idProduto") Long idProduto) {
         ProdutoRepresentationModel produtoRepresentationModel = toModel(cadastroProdutoService.getProdutoById(idProduto));
@@ -60,18 +60,14 @@ public class ProdutoController {
 
 
     @ApiOperation("Busca produtos por descrição")
-    @GetMapping(value = "/{descricao}")
+    @GetMapping(value = "/produto")
     public ResponseEntity<List<ProdutoRepresentationModel>> getProdutosByName(
-            @PathVariable(name = "descricao") String descricao) {
-
+            @RequestParam(name = "descricao") String descricao) {
         // obtem a lista de produtos do Model, nossas entidades
-        List<Produto> produtos = cadastroProdutoService.getProdutosByDescricao(descricao);
-
+        List<Produto> produtos = cadastroProdutoService.getProdutosByDescricao(descricao.toUpperCase());
         // convertemos o lista Model para Representation Model nosso DTO de saída
         List<ProdutoRepresentationModel> produtosRepresentationModel = toCollectionModel(produtos);
-
         return new ResponseEntity<List<ProdutoRepresentationModel>>(produtosRepresentationModel, HttpStatus.OK);
-
     }
 
 

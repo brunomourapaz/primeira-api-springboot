@@ -27,5 +27,9 @@ public class CadastroItemPedidoService {
         itemPedidoRepository.delete(itemPedido);
     }
 
+    public ItemPedido getItemPedido(Long idPedido, Long idItemPedido){
+       return itemPedidoRepository.getItemPedido(idPedido, idItemPedido);
+    }
+
 
 }

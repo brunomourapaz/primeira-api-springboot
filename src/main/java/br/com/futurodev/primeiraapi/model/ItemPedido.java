@@ -22,8 +22,11 @@ public class ItemPedido implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Column(nullable = false)
     private double valorItem;
 
+    @Column(nullable = false)
     private double quantidade;
 
     @OneToOne

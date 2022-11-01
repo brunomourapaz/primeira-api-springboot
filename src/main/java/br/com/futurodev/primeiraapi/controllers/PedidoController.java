@@ -34,7 +34,7 @@ public class PedidoController {
     private CadastroProdutoService cadastroProdutoService;
 
     @Autowired
-    private CadastroItemPedidoService itemPedidoService;
+    private CadastroItemPedidoService cadastroItemPedidoService;
 
 
     @PostMapping
@@ -85,13 +85,18 @@ public class PedidoController {
         return new ResponseEntity<List<PedidoRepresentationModel>>(pedidosRM, HttpStatus.OK);
     }
 
+    // TODO Falta ajuste neste método
+
     @DeleteMapping(value = "/{idPedido}/item/{idItemPedido}")
     @ResponseBody
-    public ResponseEntity<String> deleteItemPedidoById(@RequestParam(name = "idPedido") Long idPedido,
-            @RequestParam(name = "idItemPedido") Long idItemPedido){
+    public ResponseEntity<String> deleteItemPedidoById(@PathVariable(name = "idPedido") Long idPedido,
+            @PathVariable(name = "idItemPedido") Long idItemPedido){
 
-       ItemPedido itemPedido = itemPedidoService.getItemPedidoById(idItemPedido);
-      itemPedidoService.deleteItemPedido(itemPedido);
+      //ItemPedido itemPedido = cadastroItemPedidoService.getItemPedidoById(idItemPedido);
+        ItemPedido itemPedido = cadastroItemPedidoService.getItemPedido(idPedido, idItemPedido);
+      //cadastroItemPedidoService.deleteItemPedido(itemPedido);
+        cadastroItemPedidoService.deleteItemPedidoById(itemPedido.getId());
+
       return new ResponseEntity<String>("Item de ID: "+idItemPedido+" deletado.",HttpStatus.OK);
     }
 
@@ -135,6 +140,7 @@ public class PedidoController {
         pedido.setFormaPagamento(cadastroFormaPagamentoService.getFormaPagamentoById(pedidoInput.getIdFormaPagamento()));
 
         for (int i = 0; i < pedidoInput.getItensPedido().size(); i++) {
+
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setId(pedidoInput.getItensPedido().get(i).getId());
             itemPedido.setPedido(pedido);

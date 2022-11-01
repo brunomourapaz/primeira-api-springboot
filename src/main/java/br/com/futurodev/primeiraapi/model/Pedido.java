@@ -40,8 +40,9 @@ public class Pedido implements Serializable {
     // @JsonBackReference
     private Cliente cliente;
 
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "id_forma_pagamento", referencedColumnName = "id", foreignKey = @ForeignKey(name = "fk_forma_pgto"))
+    @OneToOne
+    @JoinColumn(name = "id_forma_pagamento", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_forma_pgto"))
     private FormaPagamento formaPagamento;
 
     @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

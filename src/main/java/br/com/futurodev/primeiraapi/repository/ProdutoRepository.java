@@ -17,7 +17,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> { //Crud
     Usuario findUserByLogin(String login);
      */
 
-    @Query("from Produto p where p.descricao like %?1%")
+    @Query("from Produto p where upper(p.descricao) like %?1%")
     List<Produto> getProdutosByDescricao(String descricao);
 
 
