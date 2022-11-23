@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -36,7 +38,7 @@ public class Pedido implements Serializable {
     private OffsetDateTime dataHoraAlteracao;
 
     @ManyToOne
-    @JoinColumn(name = "id_cliente", foreignKey = @ForeignKey(name ="fk_cliente"))
+    @JoinColumn(name = "id_cliente", foreignKey = @ForeignKey(name = "fk_cliente"))
     // @JsonBackReference
     private Cliente cliente;
 
@@ -45,7 +47,7 @@ public class Pedido implements Serializable {
             foreignKey = @ForeignKey(name = "fk_forma_pgto"))
     private FormaPagamento formaPagamento;
 
-    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER,  cascade = CascadeType.ALL,  orphanRemoval = true)
     private List<ItemPedido> itensPedido = new ArrayList<ItemPedido>();
 
     @JsonManagedReference

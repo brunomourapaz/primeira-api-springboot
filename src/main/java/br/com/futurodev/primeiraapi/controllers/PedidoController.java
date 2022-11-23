@@ -93,9 +93,27 @@ public class PedidoController {
             @PathVariable(name = "idItemPedido") Long idItemPedido){
 
       //ItemPedido itemPedido = cadastroItemPedidoService.getItemPedidoById(idItemPedido);
-        ItemPedido itemPedido = cadastroItemPedidoService.getItemPedido(idPedido, idItemPedido);
+      //  ItemPedido itemPedido = cadastroItemPedidoService.getItemPedido(idPedido, idItemPedido);
       //cadastroItemPedidoService.deleteItemPedido(itemPedido);
-        cadastroItemPedidoService.deleteItemPedidoById(itemPedido.getId());
+
+       Pedido pedido = cadastroPedidoService.getPedidoById(idPedido);
+
+        for (int i=0; i< pedido.getItensPedido().size(); i++) {
+            if (pedido.getItensPedido().get(i).getId() == idItemPedido){
+
+                ItemPedido itemPedido = pedido.getItensPedido().remove(i);
+                itemPedido.setPedido(null);
+                itemPedido.setProduto(null);
+                pedido.getItensPedido().clear();
+                cadastroItemPedidoService.deleteItemPedido(itemPedido);
+                // cadastroItemPedidoService.deleteItemPedidoById(idItemPedido);
+            }
+        }
+
+       // ItemPedido itemPedido = pedido.getItensPedido().remove(0);
+       // itemPedido.setPedido(null);
+       //cadastroItemPedidoService.deleteItemPedidoById(idItemPedido);
+       // cadastroItemPedidoService.deleteItemPedido(itemPedido);
 
       return new ResponseEntity<String>("Item de ID: "+idItemPedido+" deletado.",HttpStatus.OK);
     }
@@ -144,6 +162,7 @@ public class PedidoController {
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setId(pedidoInput.getItensPedido().get(i).getId());
             itemPedido.setPedido(pedido);
+            //itemPedido.setIdPedido(pedido.getId());
             itemPedido.setProduto(cadastroProdutoService.getProdutoById(pedidoInput.getItensPedido().get(i).getIdProduto()));
 
             // se o ID do itemPedido for null busca o preço do cadastro de produto

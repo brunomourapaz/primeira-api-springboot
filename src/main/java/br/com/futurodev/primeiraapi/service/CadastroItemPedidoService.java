@@ -3,6 +3,7 @@ package br.com.futurodev.primeiraapi.service;
 import br.com.futurodev.primeiraapi.model.ItemPedido;
 import br.com.futurodev.primeiraapi.repository.ItemPedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,12 +25,21 @@ public class CadastroItemPedidoService {
 
     @Transactional
     public void deleteItemPedido(ItemPedido itemPedido){
+
         itemPedidoRepository.delete(itemPedido);
     }
 
-    public ItemPedido getItemPedido(Long idPedido, Long idItemPedido){
+   public ItemPedido getItemPedido(Long idPedido, Long idItemPedido){
        return itemPedidoRepository.getItemPedido(idPedido, idItemPedido);
     }
+
+    /*
+   @Modifying
+   @Transactional
+   public void deleteItemPedidoById(Long idItemPedido){
+       itemPedidoRepository.deleteItemPedidoById(idItemPedido);
+   }
+     */
 
 
 }
